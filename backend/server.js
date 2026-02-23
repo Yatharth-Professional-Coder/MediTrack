@@ -12,7 +12,13 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://medi-track-furznnikq-yatharths-projects-3499ff01.vercel.app', 'https://medi-track-coral.vercel.app'],
+    origin: function (origin, callback) {
+        if (!origin || origin === 'http://localhost:5173' || origin.includes('vercel.app')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }));
 app.use(express.json());
