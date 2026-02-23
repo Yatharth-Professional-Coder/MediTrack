@@ -11,7 +11,10 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://medi-track-furznnikq-yatharths-projects-3499ff01.vercel.app'],
+    credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
